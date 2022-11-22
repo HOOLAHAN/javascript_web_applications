@@ -21,7 +21,7 @@ class MessageView {
 
     document.querySelector('#main-container').append(messageElement); // posting the message to the page
 
-    document.querySelector('#message-input').value = ""; // empty the text box afetr being clicked
+    document.querySelector('#message-input').value = ""; // empty the text box after being clicked
   }
 
   hideMessage() {
