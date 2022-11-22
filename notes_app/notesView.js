@@ -2,7 +2,10 @@ class NotesView {
   constructor(model) {
     this.model = model;
     this.mainContainerEl = document.querySelector('#main-container');
-
+    this.submitButtonEl = document.querySelector('#post-note-button');
+    this.submitButtonEl.addEventListener('click', () => {
+      this.addNewNote();
+    });
     console.log(this.mainContainerEl);
     }
 
@@ -17,6 +20,15 @@ class NotesView {
         this.mainContainerEl.append(newNote);
       });
     }
+
+    addNewNote() {
+      const message = document.querySelector('#add-note-input').value;
+      this.model.addNote(message);
+      this.displayNotes();
+      document.querySelector('#add-note-input').value = ""; // empty the text box afetr being clicked
+    };
+
+
 
 }
 
