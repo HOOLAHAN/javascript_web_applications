@@ -16,4 +16,20 @@ describe('MessageView', () => {
 
     expect(document.querySelector('#message')).not.toBeNull();
   });
+
+  it('Hide the message button', () => {
+    // arrange
+    document.body.innerHTML = fs.readFileSync('./index.html');
+    const view = new MessageView();
+
+    // act
+    const buttonEl = document.querySelector('#show-message-button');
+    buttonEl.click();
+    const hideButtonEl = document.querySelector('#hide-message-button');
+    hideButtonEl.click();
+
+    // assert
+    expect(document.querySelector('#message')).toBeNull();
+  });
+
 });
