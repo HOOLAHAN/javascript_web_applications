@@ -12,8 +12,10 @@ class View {
     }
 
     clearParagraphs() {
-      const element = document.getElementsByTagName('<p>');
-      this.mainContainerEl.remove(element);
+      const allParagraphs = document.querySelectorAll('p');
+      allParagraphs.forEach(paragraph => {
+        paragraph.remove();
+      });
     }
 }
 
