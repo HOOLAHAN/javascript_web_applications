@@ -38,5 +38,21 @@
     expect(document.querySelectorAll('div.note')[0].textContent).toEqual('New note.');
   });
 
+  it('when displayNotes is called twice, the corerct number of notes are displayed', () => {
+    document.body.innerHTML = fs.readFileSync('./index.html');
+   
+    const model = new NotesModel();
+    const view = new NotesView(model);
+
+    model.addNote("Test note 1");
+    model.addNote("Test note 2");
+
+    view.displayNotes();
+    view.displayNotes();
+     
+    expect(document.querySelectorAll('div.note').length).toEqual(2);
+
+  })
+
 });
  
