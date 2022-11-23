@@ -69,8 +69,18 @@ const { callbackify } = require('util');
     view.displayNotesFromApi();
 
     expect(document.querySelectorAll('div.note').length).toEqual(1)
-    expect(document.querySelectorAll('div.note')[0].textContent).toEqual('testing1');
+    expect(document.querySelectorAll('div.note')[0].textContent).toEqual('testing');
   })
+
+  // it('when createNote is called it posts the content from the user input', () => {
+  //   document.body.innerHTML = fs.readFileSync('./index.html');
+
+  //   const client = {
+  //     createNote: (notes) => {
+        
+  //     }
+  //   }
+  // })
 
 });
  

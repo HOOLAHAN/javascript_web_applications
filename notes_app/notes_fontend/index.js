@@ -11,6 +11,7 @@ const view = new NotesView(model, client);
 
 console.log(view.displayNotesFromApi())
 view.displayNotesFromApi();
+// view.displayError();
 
 
 // model.addNote('Buy milk');
