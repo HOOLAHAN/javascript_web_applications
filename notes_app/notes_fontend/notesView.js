@@ -1,6 +1,7 @@
 class NotesView {
-  constructor(model) {
+  constructor(model, notesClient) {
     this.model = model;
+    this.notesClient = notesClient;
     this.mainContainerEl = document.querySelector('#main-container');
     this.submitButtonEl = document.querySelector('#post-note-button');
     this.submitButtonEl.addEventListener('click', () => {
@@ -31,7 +32,13 @@ class NotesView {
       document.querySelector('#add-note-input').value = ""; // empty the text box afetr being clicked
     };
 
-
+    displayNotesFromApi() {
+      this.notesClient.loadNotes(data => {
+        this.model.setNotes(data)
+      });
+      this.displayNotes();
+      
+    }
 
 }
 

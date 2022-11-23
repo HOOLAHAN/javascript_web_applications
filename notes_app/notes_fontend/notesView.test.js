@@ -5,6 +5,7 @@
  const fs = require('fs');
  const NotesView = require('./notesView');
  const NotesModel = require('./notesModel');
+const { callbackify } = require('util');
  
  describe('Notes View', () => {
    it('displays two notes added', () => {
@@ -52,6 +53,23 @@
      
     expect(document.querySelectorAll('div.note').length).toEqual(2);
 
+  })
+
+  it('when displayNotesFromApi is called it displays notes from the API', () => {
+    document.body.innerHTML = fs.readFileSync('./index.html');
+
+    const client = {
+      loadNotes: (callback) => {
+        callback(["testing"])
+      }
+    };
+    const model = new NotesModel();
+    const view = new NotesView(model, client);
+
+    view.displayNotesFromApi();
+
+    expect(document.querySelectorAll('div.note').length).toEqual(1)
+    expect(document.querySelectorAll('div.note')[0].textContent).toEqual('testing1');
   })
 
 });
