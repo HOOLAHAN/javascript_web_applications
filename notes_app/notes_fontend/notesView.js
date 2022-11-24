@@ -7,11 +7,12 @@ class NotesView {
     this.submitButtonEl.addEventListener('click', () => {
       const message = document.querySelector('#add-note-input').value;
       this.addNewNote(message);
-    });
-    
-    
-    console.log("Don't Worry, Be Happy");
-  }
+    })
+    this.resetButtonEl = document.querySelector('#reset-notes-button');
+    this.resetButtonEl.addEventListener('click', () => {
+      this.resetAllNotes();
+    })
+  };
 
     displayNotes() {
       document.querySelectorAll(".note").forEach(element => {
@@ -57,6 +58,14 @@ class NotesView {
       errorMessage.textContent = "Oops something went wrong posting your message!";
       errorMessage.className = "error";
       this.mainContainerEl.append(errorMessage);
+    };
+
+    resetAllNotes() {
+      this.notesClient.resetNotes(() => {
+        this.displayNotesFromApi()
+      }, () => {
+        this.displayError()
+      });
     };
 
 }

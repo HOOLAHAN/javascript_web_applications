@@ -25,7 +25,19 @@ class NotesClient {
     .catch((error) => {
       displayError();
     });
-  } 
+  }
+
+  resetNotes(displayNotesFromApi, displayError) {
+    fetch('http://localhost:3000/notes', { method: 'DELETE' })
+    .then(() => {
+      console.log("bob marley")
+      displayNotesFromApi();
+    })
+    .catch((error) => {
+      displayError();
+    });
+  }
+
 }
 
 module.exports = NotesClient;

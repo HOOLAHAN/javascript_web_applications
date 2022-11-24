@@ -5,12 +5,12 @@
  const fs = require('fs');
  const NotesView = require('./notesView');
  const NotesModel = require('./notesModel');
-const { callbackify } = require('util');
+ const { callbackify } = require('util');
  
  describe('Notes View', () => {
    it('displays two notes added', () => {
      document.body.innerHTML = fs.readFileSync('./index.html');
-    
+
      const model = new NotesModel();
      const view = new NotesView(model);
      
