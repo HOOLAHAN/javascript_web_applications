@@ -10,7 +10,7 @@ class NotesClient {
       })
   }
 
-  createNote(notes, displayError) {
+  createNote(notes, displayNotesFromApi, displayError) {
     const noteData = { "content": notes }
     fetch('http://localhost:3000/notes', {
       method: 'POST',
@@ -18,6 +18,9 @@ class NotesClient {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(noteData) 
+    })
+    .then(() => {
+      displayNotesFromApi();
     })
     .catch((error) => {
       displayError();

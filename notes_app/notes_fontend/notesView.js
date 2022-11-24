@@ -3,14 +3,10 @@ class NotesView {
     this.model = model;
     this.notesClient = notesClient;
     this.mainContainerEl = document.querySelector('#main-container');
-       
     this.submitButtonEl = document.querySelector('#post-note-button');
     this.submitButtonEl.addEventListener('click', () => {
       const message = document.querySelector('#add-note-input').value;
       this.addNewNote(message);
-      this.notesClient.createNote(message, () => {
-        this.displayError()
-      });
     });
     
     
@@ -20,10 +16,9 @@ class NotesView {
     displayNotes() {
       document.querySelectorAll(".note").forEach(element => {
         element.remove();
-      });    
-            
+      });     
       const notes = this.model.getNotes();
-      
+
       notes.forEach((note) => {
         const newNote = document.createElement("div");
         newNote.textContent = note;
@@ -33,9 +28,12 @@ class NotesView {
     };
 
     addNewNote(message) {
-      this.model.addNote(message);
-      this.displayNotes();
-      document.querySelector('#add-note-input').value = ""; // empty the text box after being clicked
+      this.notesClient.createNote(message, () => {
+        this.displayNotesFromApi()
+      } , () => {
+        this.displayPostingError()
+      });
+      document.querySelector('#add-note-input').value = ""; // empties the text box after being clicked
     };
 
     displayNotesFromApi() {
@@ -43,13 +41,20 @@ class NotesView {
         this.model.setNotes(data)
         this.displayNotes();
       }, () => {
-        this.displayError()
+        this.displayError();
       });
     };
 
     displayError() {    
       const errorMessage = document.createElement("div");
-      errorMessage.textContent = "Oops something went wrong!";
+      errorMessage.textContent = "Oops something went wrong, server not connected!";
+      errorMessage.className = "error";
+      this.mainContainerEl.append(errorMessage);
+    };
+
+    displayPostingError() {    
+      const errorMessage = document.createElement("div");
+      errorMessage.textContent = "Oops something went wrong posting your message!";
       errorMessage.className = "error";
       this.mainContainerEl.append(errorMessage);
     };

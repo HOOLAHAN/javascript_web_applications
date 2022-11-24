@@ -10,6 +10,7 @@ const model = new NotesModel();
 const view = new NotesView(model, client);
 
 console.log(view.displayNotesFromApi())
+view.displayNotes();
 view.displayNotesFromApi();
 // view.displayError();
 
