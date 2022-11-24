@@ -1,6 +1,6 @@
 h1, p, * {
-  font-family: sans-serif;
-
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: navy
 }
 
 html {
